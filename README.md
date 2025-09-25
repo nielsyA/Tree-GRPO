@@ -1,7 +1,3 @@
-<div align="center">
-  <img src="resources/logo.jpg" width="150px">
-</div>
-
 <h1 align="center" style="margin-top: 0px;">Tree Search for LLM Agent Reinforcement Learning</h1>
 
 <p align="center">
