@@ -31,7 +31,7 @@ class GenerationTreeSearchConfig:
     n: int = 2  # number of nodes to expand
     l: int = 1  # number of iterations
     k: int = 4 # number of final selected samples per tree
-    reward_mode: str = 'tree'
+    reward_mode: str = 'tree_diff'
     expand_mode: str = 'random'
 
 class LLMGenerationTreeSearchManager:
@@ -444,9 +444,6 @@ class LLMGenerationTreeSearchManager:
                     tensor_fn=self.tensor_fn,
                 )
 
-                dprint(f"tmp_node_list[{i}] before update:", tmp_node_list[i].node_uid, parent_node.node_uid)
-                dprint(f"Updated tmp_node_list[{i}] to new_node:", new_node.node_uid)
-                dprint(f"parent={parent_node.node_uid}, child={new_node.node_uid}, child is_leaf={bool(dones[i])}")
                 parent_node.add_child(new_node)
                 tmp_node_list[i] = new_node
             

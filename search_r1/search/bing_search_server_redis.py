@@ -299,7 +299,7 @@ class SearchRequest(BaseModel):
 
 def connect_to_redis_with_retry(host, port, retries=20, delay=3):
     """
-    尝试连接 Redis，如果失败则重试。
+    try to connect Redis
     """
     for i in range(retries):
         try:
@@ -308,11 +308,11 @@ def connect_to_redis_with_retry(host, port, retries=20, delay=3):
             print(f"Successfully connected to Redis at {host}:{port}")
             return redis_client
         except redis.exceptions.BusyLoadingError as e:
-            # 专门捕获 LOADING 错误
+            # catch LOADING
             print(f"Attempt {i+1}/{retries}: Redis is loading data. Retrying in {delay} seconds... Error: {e}")
             time.sleep(delay)
         except redis.exceptions.ConnectionError as e:
-            # 捕获其他连接错误
+            # else
             print(f"Attempt {i+1}/{retries}: Could not connect to Redis. Retrying in {delay} seconds... Error: {e}")
             time.sleep(delay)
             
@@ -343,13 +343,6 @@ if __name__ == "__main__":
     
     # 1. Connect to Redis
     redis_client = connect_to_redis_with_retry(args.redis_host, args.redis_port)
-    # try:
-    #     redis_client = redis.Redis(host=args.redis_host, port=args.redis_port, decode_responses=True)
-    #     redis_client.ping()
-    #     print(f"Successfully connected to Redis at {args.redis_host}:{args.redis_port}")
-    # except redis.exceptions.ConnectionError as e:
-    #     print(f"FATAL: Could not connect to Redis at {args.redis_host}:{args.redis_port}. Please ensure Redis is running. Error: {e}")
-    #     exit(1)
 
     # 2. Initialize the Cache Manager for persistence
     cache_file_path = str(pathlib.Path(args.cache_file).expanduser())

@@ -87,22 +87,22 @@ class TensorHelper:
 
     def pad_and_stack(self, tensor_list: List[torch.Tensor], pad_to_left=True, pad_value=None):
         """
-        对不同长度的张量列表进行统一 padding 并堆叠。
+        Pad and stack a tensor list with different shapes.
 
         Args:
-            tensor_list (List[torch.Tensor]): 一个包含 1D 张量的列表。
-            pad_to_left (bool): 如果为 True，则在左侧填充；否则在右侧填充。
+            tensor_list (List[torch.Tensor])
+            pad_to_left (bool)
 
         Returns:
-            torch.Tensor: 一个形状为 (n, m) 的张量。
+            torch.Tensor
         """
-        # Step 1: 找到目标长度
+        # Step 1: find target length
         max_length = max([tensor.size(0) for tensor in tensor_list])
 
         if pad_value == None:
             pad_value = self.config.pad_token_id
         
-        # Step 2: 按照左侧或右侧进行 padding
+        # Step 2: padding
         if pad_to_left:
             padded_tensors = [
                 torch.cat([torch.full((max_length - tensor.size(0),), pad_value, dtype=tensor.dtype, device=tensor.device), tensor])
@@ -114,7 +114,7 @@ class TensorHelper:
                 for tensor in tensor_list
             ]
         
-        # Step 3: 堆叠张量
+        # Step 3: stack
         stacked_tensor = torch.stack(padded_tensors, dim=0)
         
         return stacked_tensor

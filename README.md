@@ -142,6 +142,11 @@ The implementation is inspired by [TreeRL](https://github.com/THUDM/TreeRL).
 We express our gratitude to these open-source projects.
 
 ## Citation
-```
-Coming soon.
+```bibtex
+@article{ji2025treesearch,
+  title={Tree Search for LLM Agent Reinforcement Learning}, 
+  author={Yuxiang Ji and Ziyu Ma and Yong Wang and Guanhua Chen and Xiangxiang Chu and Liaoni Wu},
+  journal={arXiv preprint arXiv:2509.21240},
+  year={2025}
+}
 ```

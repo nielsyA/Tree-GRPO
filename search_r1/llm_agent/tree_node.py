@@ -40,7 +40,7 @@ class TreeNode:
         depth: int = 0,
         is_leaf: bool = False,
         correct_leaf_in_subtree: int = 0,
-        reward_mode: str = 'tree',
+        reward_mode: str = 'base', 
         tensor_fn = None,
         margin = 0.1,
     ):
@@ -90,11 +90,10 @@ class TreeNode:
         """
         print(f"!!! WARNING: Direct assignment to child_node on node {self.node_uid}. New list has {len(value)} children.")
         
-        # 在这里设置一个断点，或者打印调用栈来找到谁在做这件事
         import traceback
         traceback.print_stack()
         
-        # 检查新列表里是否包含自己
+        # Check
         for child in value:
             if child is self:
                 raise ValueError(f"CRITICAL: Attempted to directly assign a list containing the node itself as its own child. Node UID: {self.node_uid}")
@@ -110,10 +109,10 @@ class TreeNode:
     
     def get_subtree_nodes(self):
         """
-        通过遍历动态获取所有子孙节点。
+        Dynamically get all descendant nodes by traversing the tree
         """
         nodes = []
-        nodes_to_visit = list(self.child_node) # 从直接子节点开始
+        nodes_to_visit = list(self.child_node) # from child nodes
         while nodes_to_visit:
             current_node = nodes_to_visit.pop(0)
             nodes.append(current_node)
@@ -138,24 +137,7 @@ class TreeNode:
         for node in self.get_subtree_nodes():
             if not node.is_leaf:
                 candidate_set.append(node)
-        if mode == 'random':
-            result = random.choices(candidate_set, k=n)
-        elif mode == 'success_first':
-            success_candidates = [
-                node for node in candidate_set if node.valid_action_stats != 0
-            ]
-            sorted_candidates = sorted(
-                success_candidates, # 使用过滤后的列表
-                key=lambda node: node.valid_action_stats - node.depth,
-                reverse=True
-            )
-            result = sorted_candidates[:n]
-            num_missing = n - len(result)
-            if num_missing > 0:
-                if len(result) == 0:
-                    result.extend([self] * num_missing)
-                else:
-                    result.extend(random.choices(candidate_set, k=num_missing))
+        result = random.choices(candidate_set, k=n)
                 
         assert len(result) == n, f"get_expand_node error, len(result)={len(result)} != n={n}"
         return result
@@ -209,7 +191,7 @@ class TreeNode:
 
     def calculate_final_score_from_root(self):
         """
-        Calculate the tree-based final score from root
+        Calculate the Diff-based final score from root (not for Tree-GRPO. Tree-GRPO uses base mode)
         """
 
         # First do dfs and compute the subtree leaf original score
@@ -245,7 +227,8 @@ class TreeNode:
         """
         final_token_level_scores = torch.zeros_like(self.responses, dtype=torch.float32)
 
-        if self.reward_mode == 'tree':
+        # Diff-based Reward
+        if self.reward_mode == 'tree_diff':
             valid_response_length_list = []
             scores_list = []
             node = self.parent_node
@@ -265,14 +248,13 @@ class TreeNode:
                 
                 l = valid_response_length_list[i-1]
                 r = valid_response_length_list[i] - 1
-                # r = min(valid_response_length, )
 
                 if l < r:
                     final_token_level_scores[l:r] = score
+        # Tree-GRPO uses base mode
         else:
             valid_response_length = self.tensor_fn.create_attention_mask(self.responses).sum()
             final_token_level_scores[valid_response_length-1] = self.original_score
-            # print(f'!!!calculate score, final_token_level_scores.shape={final_token_level_scores.shape}, valid_response_length={valid_response_length}')
 
         return final_token_level_scores
 
@@ -288,12 +270,12 @@ class TreeNode:
             if child._prune_subtree(candidate_uid_set):
                 surviving_children.append(child)
         
-        # 用存活下来的子节点更新列表
+        # update child node
         self._child_node = surviving_children
                 
-        # 决定当前节点是否应该被保留。保留的条件是：
-        # 1. 它在candidate_uid_set中
-        # 2. 或者，在剪枝后它仍然有子节点
+        # Determine whether the current node should be retained. The conditions for retention are:
+        # 1. It is in candidate_uid_set
+        # 2. Or, it still has child nodes after pruning
         should_keep_this_node = self.node_uid in candidate_uid_set or (len(self._child_node) > 0)
 
         dprint(f'end, node={self.node_uid}, is keeped={should_keep_this_node}')
