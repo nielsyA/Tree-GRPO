@@ -60,7 +60,7 @@ pip install vllm==0.8.5.post1
 # verl
 pip install -e .
 # flash attention 2
-pip3 install flash-attn --no-build-isolation
+pip install flash-attn --no-build-isolation
 pip install swanlab
 ```
 
