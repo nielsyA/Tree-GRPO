@@ -1,4 +1,7 @@
-<h1 align="center" style="margin-top: 0px;">Tree Search for LLM Agent Reinforcement Learning</h1>
+<div align="center">
+  <img src="resources/logo.png" width="380px">
+</div>
+<h1 align="center" style="margin-top: 10px;">Tree Search for LLM Agent Reinforcement Learning</h1>
 
 <p align="center">
   <a href="https://yuxiang-ji.com/">Yuxiang Ji</a><sup>1,2</sup>,
